@@ -27,7 +27,7 @@ namespace geometry{
     bool point_on_line(double x1,double y1,double x2,double y2,double x3,double y3)
     {
         double A = (y1-y2), B = (x2 - x1), C = -y1*B - x1*A;
-        return A*x3 + B*y3 + C;
+        return bool(A*x3 + B*y3 + C);
     }
 
 
@@ -53,9 +53,9 @@ namespace geometry{
     {
         double A1 = (y1R-y2R), B1 = (x2R-x1R), C1 = -y1R*B1 - x1R*A1;
         double A2 = (y1-y2), B2 = (x2 - x1), C2 = -y1*B2 - x1*A2;
-        std::cout << A2 << " " << B2 << " " << C2 << '\n';
+       //std::cout << A2 << " " << B2 << " " << C2 << '\n';
         double denom = math::det(A1,B1,A2,B2);
-        std::cout << denom << std::endl;
+       //std::cout << denom << std::endl;
         if(denom != 0)
         {
             double x = - math::det(C1, B1, C2, B2)/ denom;
@@ -73,16 +73,13 @@ namespace geometry{
     {
         double A1 = (y1-y2), B1 = (x2-x1), C1 = -y1*B1 - x1*A1;
         double A2 = (y3-y4), B2 = (x4 - x3), C2 = -y3*B2 - x3*A2;
-        std::cout << A2 << " " << B2 << " " << C2 << '\n';
+        //std::cout << A2 << " " << B2 << " " << C2 << '\n';
         double denom = math::det(A1,B1,A2,B2);
-        std::cout << denom << std::endl;
+        //std::cout << denom << std::endl;
         if(denom != 0)
         {
             double x = - math::det(C1, B1, C2, B2)/ denom;
-            //std::cout << x << '\n';
             double y = - math::det(A1, C1, A2, C2)/ denom;
-            //std::cout << y << '\n';
-            //std::cout << point_between(x1,x2,x) << " " << point_between(y1,y2,y) << " " << point_on_ray(x1,x2,x) << " " << point_on_ray(y1,y2,y) << '\n';
             return point_between(x1,x2,x) && point_between(y1,y2,y) && point_between(y3,y4,y) && point_between(x3,x4,x);
         }
         else
